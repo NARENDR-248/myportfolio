@@ -6,18 +6,21 @@ import NavBar from "./component/NavBar";
 import Portfolio from "./component/Portfolio";
 import Skils from "./component/Skils";
 import SocialLinks from "./component/SocialLinks";
-import { Element } from 'react-scroll'; // Import Element from react-scroll
+import { Element } from 'react-scroll';
+import { ThemeProvider, useTheme } from "./component/ThemeContext"; // Import ThemeProvider and useTheme
 
-export default function App() {
+function AppContent() {
+  const { darkMode } = useTheme(); // Access darkMode from ThemeContext
+
   return (
-    <div>
+    <div className={darkMode ? 'bg-black text-white' : 'bg-white text-black'}>
       {/* Navbar at the top */}
       <NavBar />
 
       {/* Sections wrapped with Element for smooth scroll */}
       <Element name="home" className="section">
-        <Home />
-      </Element>
+  <Home darkMode={darkMode} />
+</Element>
 
       <SocialLinks />
 
@@ -37,5 +40,13 @@ export default function App() {
         <Contact />
       </Element>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
