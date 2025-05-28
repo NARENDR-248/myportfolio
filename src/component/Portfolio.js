@@ -4,8 +4,10 @@ import weather from '../asets/weather.jpg';
 import movieapp from '../asets/movieapp.jpg';
 import pet from '../asets/petstore.jpeg';
 import Card from './Card';
+import { useTheme } from './ThemeContext'; // Import useTheme from ThemeContext
 
 function Portfolio() {
+    const { darkMode } = useTheme(); // Access darkMode from ThemeContext
     const portfolio = [
         {
             id: 1,
@@ -26,7 +28,11 @@ function Portfolio() {
     ];
 
     return (
-        <div className='bg-gradient-to-t from-gray-800 to-black w-full text-white md:h-screen'>
+        <div className={`h-screen w-full ${
+        darkMode
+          ? 'bg-gradient-to-b from-gray-900 to-black text-white'
+          : 'bg-gradient-to-b from-gray-100 to-white text-black'
+      }`}>
             <div className='max-w-screen-lg p-4 mx-auto flex flex-col justify-center w-full h-full'>
                 <div className='pb-8'>
                     <p className='font-bold text-gray-400 text-3xl inline border-b-4 border-gray-200'>Projects</p>
