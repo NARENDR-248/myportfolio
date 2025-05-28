@@ -66,8 +66,15 @@ function Contact() {
                             className={`p-3 bg-transparent border-2 border-gray-400 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300 transition duration-200 ${darkMode ? 'text-white' : 'text-black'
                                 }`}
                         ></textarea>
-                        </form>
 
+                        <button
+                            className='bg-gradient-to-r from-blue-600 to-cyan-400 px-6 py-3 my-8 mx-auto flex items-center rounded-md hover:scale-105 transition-transform duration-200 text-black font-semibold'
+                            data-aos="fade-up" // Changed to "fade-up" to test AOS animation
+                            data-aos-delay="500" // Optional delay to make it more visible
+                        >
+                            Let's Talk
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
