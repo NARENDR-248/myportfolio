@@ -1,6 +1,7 @@
 import React from "react";
 import { MotionConfig } from "framer-motion";
 import About from "./component/About";
+import BuildProcess from "./component/BuildProcess";
 import Contact from "./component/Contact";
 import CtaBar from "./component/CtaBar";
 import CustomCursor from "./component/CustomCursor";
@@ -34,6 +35,7 @@ function AppContent() {
 
       <Element name="skills">
         <Skils />
+        <BuildProcess />
       </Element>
 
       <Element name="projects">

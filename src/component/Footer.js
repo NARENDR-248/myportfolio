@@ -6,8 +6,8 @@ import SocialLinks from './SocialLinks';
 const links = [
   { id: 1, name: 'Home', to: 'home' },
   { id: 2, name: 'About', to: 'about' },
-  { id: 3, name: 'Projects', to: 'projects' },
-  { id: 4, name: 'Skills', to: 'skills' },
+  { id: 3, name: 'Skills', to: 'skills' },
+  { id: 4, name: 'Projects', to: 'projects' },
   { id: 5, name: 'Experience', to: 'experience' },
   { id: 6, name: 'Contact', to: 'contact' },
 ];
@@ -23,8 +23,10 @@ function Footer() {
             N
           </span>
           <div>
-            <p className="font-bold">Narendra</p>
-            <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>React Developer</p>
+            <p className="font-bold">Narendra Kadiveti</p>
+            <p className="text-xs font-medium bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              MERN Stack Developer
+            </p>
           </div>
         </div>
 

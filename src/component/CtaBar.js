@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { FaFileAlt, FaCommentDots } from 'react-icons/fa';
 import { useTheme } from './ThemeContext';
+import { RESUME_URL } from '../utilis/resume';
 
 function CtaBar() {
   const { darkMode } = useTheme();
@@ -26,14 +27,16 @@ function CtaBar() {
         </div>
 
         <div className="flex items-center gap-4 shrink-0">
-          <button
-            type="button"
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`flex items-center gap-2 px-6 py-3 rounded-full border font-semibold transition-colors duration-300 ${
               darkMode ? 'border-white/20 text-white hover:bg-white/10' : 'border-black/20 text-slate-900 hover:bg-black/5'
             }`}
           >
             <FaFileAlt size={13} /> View Resume
-          </button>
+          </a>
           <Link
             to="contact"
             smooth

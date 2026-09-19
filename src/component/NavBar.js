@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes, FaSun, FaMoon, FaDownload } from 'react-icons/fa';
 import { Link } from 'react-scroll';
 import { useTheme } from './ThemeContext';
+import { RESUME_FILENAME, RESUME_URL } from '../utilis/resume';
 
 const links = [
   { id: 1, name: 'Home', to: 'home' },
   { id: 2, name: 'About', to: 'about' },
-  { id: 3, name: 'Projects', to: 'projects' },
-  { id: 4, name: 'Skills', to: 'skills' },
+  { id: 3, name: 'Skills', to: 'skills' },
+  { id: 4, name: 'Projects', to: 'projects' },
   { id: 5, name: 'Experience', to: 'experience' },
   { id: 6, name: 'Contact', to: 'contact' },
 ];
@@ -38,11 +39,13 @@ function NavBar() {
           </span>
           <span className="leading-tight text-left">
             <span className={`block font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>Narendra</span>
-            <span className={`block text-xs ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>React Developer</span>
+            <span className="block whitespace-nowrap text-xs font-medium bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              MERN Stack Developer
+            </span>
           </span>
         </Link>
 
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-8">
           {links.map(({ id, name, to }) => (
             <li key={id}>
               <Link
@@ -75,16 +78,17 @@ function NavBar() {
             {darkMode ? <FaSun size={16} /> : <FaMoon size={16} />}
           </button>
 
-          <button
-            type="button"
-            className="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform duration-200"
+          <a
+            href={RESUME_URL}
+            download={RESUME_FILENAME}
+            className="hidden sm:flex items-center gap-2 whitespace-nowrap px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/30 hover:scale-105 transition-transform duration-200"
           >
             Download CV <FaDownload size={12} />
-          </button>
+          </a>
 
           <button
             onClick={() => setNav(!nav)}
-            className={`md:hidden ${darkMode ? 'text-white' : 'text-slate-900'}`}
+            className={`lg:hidden ${darkMode ? 'text-white' : 'text-slate-900'}`}
             aria-label="Toggle menu"
           >
             {nav ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -94,7 +98,7 @@ function NavBar() {
 
       {nav && (
         <ul
-          className={`md:hidden flex flex-col items-center gap-6 py-8 border-t ${
+          className={`lg:hidden flex flex-col items-center gap-6 py-8 border-t ${
             darkMode ? 'bg-slate-950/95 border-white/10 text-slate-300' : 'bg-white/95 border-black/5 text-slate-600'
           }`}
         >
@@ -112,12 +116,16 @@ function NavBar() {
               </Link>
             </li>
           ))}
-          <button
-            type="button"
-            className="mt-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold"
-          >
-            Download CV
-          </button>
+          <li>
+            <a
+              href={RESUME_URL}
+              download={RESUME_FILENAME}
+              onClick={() => setNav(false)}
+              className="mt-2 inline-block px-6 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold"
+            >
+              Download CV
+            </a>
+          </li>
         </ul>
       )}
     </nav>

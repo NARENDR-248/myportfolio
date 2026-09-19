@@ -14,6 +14,7 @@ const portfolio = [
     id: 1,
     src: todo,
     title: 'To-Do List',
+    category: 'FRONTEND',
     desc: 'A simple and responsive To-Do app to manage daily tasks.',
     tags: ['React', 'LocalStorage'],
     problem: 'Needed a lightweight way to track daily tasks without setting up a backend.',
@@ -27,6 +28,7 @@ const portfolio = [
     id: 2,
     src: weather,
     title: 'Weather App',
+    category: 'FRONTEND',
     desc: 'Real-time weather information using public API.',
     tags: ['React', 'API Integration'],
     problem: 'Wanted quick, real-time weather lookups without a cluttered interface.',
@@ -40,6 +42,7 @@ const portfolio = [
     id: 3,
     src: petstore,
     title: 'Pet Store App',
+    category: 'FRONTEND',
     desc: 'A pet store storefront concept with product categories and services.',
     tags: ['React', 'UI Design'],
     problem: 'Practiced building an e-commerce style storefront UI.',
@@ -53,6 +56,7 @@ const portfolio = [
     id: 4,
     src: movieapp,
     title: 'Movie App',
+    category: 'FRONTEND',
     desc: 'Browse popular movies with search functionality.',
     tags: ['React', 'API Integration'],
     problem: 'Wanted an easy way to browse and search popular movies.',
@@ -64,6 +68,10 @@ const portfolio = [
   },
 ];
 
+// Every project so far is frontend-only, so the heading only claims "Full-Stack" once a project
+// tagged category: 'FULL STACK' (with real codeHref/liveHref) is added above.
+const hasFullStackProject = portfolio.some(({ category }) => category === 'FULL STACK');
+
 function Portfolio() {
   const { darkMode } = useTheme();
   const [activeProject, setActiveProject] = useState(null);
@@ -74,7 +82,9 @@ function Portfolio() {
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-10">
           <div>
             <p className="text-sm font-semibold tracking-widest text-blue-400 mb-3">FEATURED PROJECTS</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold">Some of My Recent Work</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold">
+              {hasFullStackProject ? 'Featured Full-Stack Projects' : 'Featured Projects'}
+            </h2>
           </div>
           <a
             href="https://github.com/"

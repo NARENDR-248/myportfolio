@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaTimes, FaCheck } from 'react-icons/fa';
+import { CategoryBadge, TechBadges } from './ProjectBadges';
 import { useTheme } from './ThemeContext';
 
 function ProjectModal({ project, onClose }) {
@@ -50,22 +51,20 @@ function ProjectModal({ project, onClose }) {
           <FaTimes size={14} />
         </button>
 
-        <img src={project.src} alt={project.title} className="w-full h-52 object-cover" />
+        <div className="relative">
+          <img src={project.src} alt={project.title} className="w-full h-52 object-cover" />
+          {project.category && (
+            <div className="absolute left-4 top-4">
+              <CategoryBadge category={project.category} />
+            </div>
+          )}
+        </div>
 
         <div className="p-6">
           <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
 
-          <div className="flex flex-wrap gap-2 mb-5">
-            {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className={`text-xs px-3 py-1 rounded-full font-medium ${
-                  darkMode ? 'bg-blue-500/10 text-blue-300' : 'bg-blue-50 text-blue-600'
-                }`}
-              >
-                {tag}
-              </span>
-            ))}
+          <div className="mb-5">
+            <TechBadges tags={project.tags} />
           </div>
 
           <p className={`text-sm font-semibold mb-1 ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>Purpose</p>
@@ -83,26 +82,32 @@ function ProjectModal({ project, onClose }) {
             ))}
           </ul>
 
-          <div className="flex items-center gap-4">
-            <a
-              href={project.codeHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors duration-200 ${
-                darkMode ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <FaGithub size={14} /> Code
-            </a>
-            <a
-              href={project.liveHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors duration-200"
-            >
-              Live <FaExternalLinkAlt size={12} />
-            </a>
-          </div>
+          {(project.codeHref || project.liveHref) && (
+            <div className="flex items-center gap-4">
+              {project.codeHref && (
+                <a
+                  href={project.codeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors duration-200 ${
+                    darkMode ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <FaGithub size={14} /> GitHub
+                </a>
+              )}
+              {project.liveHref && (
+                <a
+                  href={project.liveHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                >
+                  Live Demo <FaExternalLinkAlt size={12} />
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
