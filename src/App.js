@@ -1,44 +1,56 @@
 import React from "react";
+import { MotionConfig } from "framer-motion";
 import About from "./component/About";
 import Contact from "./component/Contact";
+import CtaBar from "./component/CtaBar";
+import CustomCursor from "./component/CustomCursor";
+import Experience from "./component/Experience";
+import Footer from "./component/Footer";
 import Home from "./component/Home";
 import NavBar from "./component/NavBar";
 import Portfolio from "./component/Portfolio";
 import Skils from "./component/Skils";
-import SocialLinks from "./component/SocialLinks";
+import Stats from "./component/Stats";
 import { Element } from 'react-scroll';
-import { ThemeProvider, useTheme } from "./component/ThemeContext"; // Import ThemeProvider and useTheme
+import { ThemeProvider, useTheme } from "./component/ThemeContext";
 
 function AppContent() {
-  const { darkMode } = useTheme(); // Access darkMode from ThemeContext
+  const { darkMode } = useTheme();
 
   return (
-    <div className={darkMode ? 'bg-black text-white' : 'bg-white text-black'}>
-      {/* Navbar at the top */}
+    <div className={darkMode ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}>
+      <CustomCursor />
       <NavBar />
 
-      {/* Sections wrapped with Element for smooth scroll */}
-      <Element name="home" className="section">
-  <Home darkMode={darkMode} />
-</Element>
+      <Element name="home">
+        <Home />
+      </Element>
 
-      <SocialLinks />
-
-      <Element name="about" className="section">
+      <Element name="about">
         <About />
       </Element>
 
-      <Element name="portfolio" className="section">
-        <Portfolio />
-      </Element>
+      <Stats />
 
-      <Element name="skils" className="section">
+      <Element name="skills">
         <Skils />
       </Element>
 
-      <Element name="contact" className="section">
+      <Element name="projects">
+        <Portfolio />
+      </Element>
+
+      <Element name="experience">
+        <Experience />
+      </Element>
+
+      <Element name="contact">
         <Contact />
       </Element>
+
+      <CtaBar />
+
+      <Footer />
     </div>
   );
 }
@@ -46,7 +58,9 @@ function AppContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <MotionConfig reducedMotion="user">
+        <AppContent />
+      </MotionConfig>
     </ThemeProvider>
   );
 }

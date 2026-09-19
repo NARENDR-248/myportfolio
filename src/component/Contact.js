@@ -1,84 +1,101 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS CSS
-import { useTheme } from './ThemeContext'; // Import useTheme from ThemeContext
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa';
+import { useTheme } from './ThemeContext';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
 
 function Contact() {
-    const { darkMode } = useTheme(); // Access darkMode from ThemeContext
-    useEffect(() => {
-        AOS.init({
-            duration: 1000, // Duration of animation
-            easing: 'ease-in-out', // Easing option
-            once: true, // Animation will happen only once
-        });
-    }, []);
+  const { darkMode } = useTheme();
 
-    return (
-        <div
-            className={`min-h-screen w-full ${darkMode
-                    ? 'bg-gradient-to-b from-gray-900 to-black text-white'
-                    : 'bg-gradient-to-b from-gray-100 to-white text-black'
-                }`}
-            data-aos="fade-up" // Applying AOS to the entire section
-        >
-            <div
-                className='max-w-screen-lg p-4 mx-auto flex flex-col justify-center h-full'
-                data-aos="fade-up"
-            >
-                <div>
-                    <p
-                        className='text-3xl font-bold inline border-b-4 border-gray-300 p-2'
-                        data-aos="zoom-in" // Zoom-in effect for title
-                    >
-                        Contact
-                    </p>
-                    <p
-                        className='py-6'
-                        data-aos="fade-right" // Fade-right effect for subtext
-                    >
-                        Let's get in touch!
-                    </p>
-                </div>
-                <div
-                    className='flex justify-center items-center'
-                    data-aos="fade-up"
-                >
-                    <form action='https://getform.io/f/adryvwva' method='post'
-                        className='flex flex-col w-full md:w-1/2 space-y-4'
-                        data-aos="fade-left"
-                    >
-                        <input
-                            type='text'
-                            placeholder='Enter your name'
-                            className={`p-3 bg-transparent border-2 border-gray-400 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300 transition duration-200 ${darkMode ? 'text-white' : 'text-black'
-                                }`}
-                        />
-                        <input
-                            type='email'
-                            placeholder='Enter your email'
-                            className={`p-3 bg-transparent border-2 border-gray-400 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300 transition duration-200 ${darkMode ? 'text-white' : 'text-black'
-                                }`}
-                        />
-                        <textarea
-                            name='message'
-                            placeholder='Enter your message'
-                            rows={10}
-                            className={`p-3 bg-transparent border-2 border-gray-400 rounded-md placeholder-gray-500 focus:outline-none focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300 transition duration-200 ${darkMode ? 'text-white' : 'text-black'
-                                }`}
-                        ></textarea>
+  const inputClasses = `w-full p-3 rounded-xl border bg-transparent placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition duration-200 ${
+    darkMode
+      ? 'border-white/10 text-white placeholder-slate-500 focus:border-blue-400'
+      : 'border-black/10 text-slate-900 placeholder-slate-400 focus:border-blue-400'
+  }`;
 
-                        <button
-                            className='bg-gradient-to-r from-blue-600 to-cyan-400 px-6 py-3 my-8 mx-auto flex items-center rounded-md hover:scale-105 transition-transform duration-200 text-black font-semibold'
-                            data-aos="fade-up" // Changed to "fade-up" to test AOS animation
-                            data-aos-delay="500" // Optional delay to make it more visible
-                        >
-                            Let's Talk
-                        </button>
-                    </form>
-                </div>
-            </div>
+  return (
+    <div className={`w-full py-16 ${darkMode ? 'bg-slate-950 text-white' : 'bg-slate-50 text-slate-900'}`}>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-8">
+        <div className="mb-10">
+          <p className="text-sm font-semibold tracking-widest text-blue-400 mb-3">GET IN TOUCH</p>
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-3">Let's Work Together</h2>
+          <p className={`max-w-xl ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+            I'm always open to discussing new opportunities, interesting projects or
+            collaborations.
+          </p>
         </div>
-    );
+
+        <div className="grid md:grid-cols-3 gap-10">
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeUp}
+            className="space-y-4"
+          >
+            <div className="flex items-center gap-3">
+              <span className="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                <FaEnvelope size={16} />
+              </span>
+              <a href="mailto:narendra@example.com" className="text-sm font-medium hover:text-blue-400 transition-colors">
+                narendra@example.com
+              </a>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                <FaMapMarkerAlt size={16} />
+              </span>
+              <span className="text-sm font-medium">Hyderabad, India</span>
+            </div>
+          </motion.div>
+
+          <motion.form
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={fadeUp}
+            action="https://getform.io/f/adryvwva"
+            method="post"
+            className={`md:col-span-1 space-y-4 p-6 rounded-2xl border backdrop-blur-xl ${
+              darkMode ? 'border-white/10 bg-white/5' : 'border-black/10 bg-white shadow-sm'
+            }`}
+          >
+            <input type="text" name="name" placeholder="Your Name" className={inputClasses} required />
+            <input type="email" name="email" placeholder="Your Email" className={inputClasses} required />
+            <textarea name="message" placeholder="Your Message" rows={5} className={inputClasses} required />
+            <button
+              type="submit"
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold shadow-lg shadow-blue-500/30 hover:scale-[1.02] transition-transform duration-200"
+            >
+              Send Message <FaPaperPlane size={13} />
+            </button>
+          </motion.form>
+
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeUp}
+            className="flex items-center justify-center"
+          >
+            <p className={`font-signture text-3xl leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-500'}`}>
+              "Good Developers
+              <br />
+              Build Solutions.
+              <br />
+              Great Developers
+              <br />
+              Build Opportunities."
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Contact;
